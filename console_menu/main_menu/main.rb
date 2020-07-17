@@ -3,6 +3,11 @@
 module ConsoleMenu
   module MainMenu
     class Main
+      def initialize(rule_file_path:, sheet:)
+        @rule_file_path = rule_file_path
+        @sheet = sheet
+      end
+
       def run
         loop do
           show_menu
@@ -31,14 +36,20 @@ module ConsoleMenu
       end
 
       def show_rule
-        puts '================== begin ======================'
-        puts '================== rule ======================='
-        puts '================== end ========================'
+        file = File.open(@rule_file_path)
+        puts file.read
+        file.close
       end
 
       def show_statistics
+        statistic_table = @sheet.load
         puts '================== begin ======================'
-        puts '================== staistic ==================='
+        puts 'Rating-----Name-----Difficulty-----Attempts Total-----Attempts Used-----Hints Total----Hints Used'
+        if statistic_table
+          statistic_table.map { |row| puts [row.player_name, row.difficult_name, row.init_attempts_count, row.used_attempts_count, row.init_hints_count, row.used_hits_count].join('-----') }
+        else
+          puts 'Empty Statistic'
+        end
         puts '================== end ========================'
       end
     end

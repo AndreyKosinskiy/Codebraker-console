@@ -4,7 +4,7 @@ require_relative 'bootstrap'
 
 module ConsoleMenu
   class Console
-    def initialize(storage: nil)
+    def initialize(storage: nil,rule_file_path:nil)
       @init_state = {
         player: BeforeGame::RegistrationPlayer,
         difficult: BeforeGame::DifficultChooser,
@@ -13,7 +13,7 @@ module ConsoleMenu
       }
       @state = @init_state
       @console_menu = {
-        main_menu_console: proc { ConsoleMenu::MainMenu::Main.new.run },
+        main_menu_console: proc { ConsoleMenu::MainMenu::Main.new(rule_file_path:rule_file_path,sheet:@state[:sheet]).run },
         registration_menu_console: proc { ConsoleMenu::RegistrationMenu::Registration.new(state: @state, player_object: @state[:player], difficult_object: @state[:difficult]).run },
         game_menu_console: proc { ConsoleMenu::GameMenu::Game.new(state: @state, game: @state[:game], player: @state[:player], difficult: @state[:difficult]).run }
       }
