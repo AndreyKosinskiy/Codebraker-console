@@ -41,15 +41,14 @@ module ConsoleMenu
           if @game.player_win?(result)
             puts "You win!\n Save result?(Yes/No(or else))"
             save_it = gets.chomp.downcase
-            save_game_result if save_it == "yes"
+            save_game_result if save_it == 'yes'
             return 1
           end
 
-          if !@game.can_use_attempts?
+          unless @game.can_use_attempts?
             # TODO: i18n gem
             puts ' You have not any attempts left.'
-            return 1
-          else
+            1
           end
         rescue ArgumentError => e
           puts e.message
@@ -71,8 +70,8 @@ module ConsoleMenu
         @state[:sheet].store
       end
 
-      def cover_for_result(result, true_cover = '+', false_cover = '-')
-        result.map { |item| item ? true_cover : false_cover }.join
+      def cover_for_result(result, digit_and_place = '+', only_digit = '-')
+        result.map { |item| item ? digit_and_place : only_digit }.join
       end
     end
   end
