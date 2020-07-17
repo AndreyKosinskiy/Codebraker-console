@@ -46,7 +46,12 @@ module ConsoleMenu
         puts '================== begin ======================'
         puts 'Rating-----Name-----Difficulty-----Attempts Total-----Attempts Used-----Hints Total----Hints Used'
         if statistic_table
-          statistic_table.map { |row| puts [row.player_name, row.difficult_name, row.init_attempts_count, row.used_attempts_count, row.init_hints_count, row.used_hits_count].join('-----') }
+          statistic_table.map do |row|
+            puts [row.player_name, row.difficult_name,
+                  row.init_attempts_count, row.used_attempts_count,
+                  row.init_hints_count, row.used_hits_count]
+              .join('-----')
+          end
         else
           puts 'Empty Statistic'
         end
