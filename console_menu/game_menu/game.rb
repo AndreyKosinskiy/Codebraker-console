@@ -37,14 +37,19 @@ module ConsoleMenu
         guess = gets.chomp.downcase
         begin
           result = @game.my_guess(input_value: guess)
-          return 1 if @game.player_win?(result)
+          puts cover_for_result(result)
+          if @game.player_win?(result)
+            puts "You win!\n Save result?(Yes/No(or else))"
+            save_it = gets.chomp.downcase
+            save_game_result if save_it == "yes"
+            return 1
+          end
 
           if !@game.can_use_attempts?
             # TODO: i18n gem
             puts ' You have not any attempts left.'
-            1
+            return 1
           else
-            puts cover_for_result(result)
           end
         rescue ArgumentError => e
           puts e.message
@@ -59,6 +64,11 @@ module ConsoleMenu
           # TODO: i18n gem
           puts 'You have not any hints left'
         end
+      end
+
+      def save_game_result
+        @state[:sheet].new_row = @game.current_stat
+        @state[:sheet].store
       end
 
       def cover_for_result(result, true_cover = '+', false_cover = '-')
