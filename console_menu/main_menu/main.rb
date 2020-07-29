@@ -55,9 +55,9 @@ module ConsoleMenu
 
       def puts_line(statistic_table)
         statistic_table.map do |row|
-          puts [row.player_name, row.difficult_name,
+          puts [row.rating, row.player_name, row.difficult_name,
                 row.init_attempts_count, row.used_attempts_count,
-                row.init_hints_count, row.used_hits_count]
+                row.init_hints_count, row.used_hints_count]
             .join('-----')
         end
       end
@@ -68,12 +68,6 @@ module ConsoleMenu
         puts 'Rating-----Name-----Difficulty-----Attempts Total-----Attempts Used-----Hints Total----Hints Used'
         if statistic_table
           puts_line(statistic_table)
-          # statistic_table.map do |row|
-          #   puts [row.player_name, row.difficult_name,
-          #         row.init_attempts_count, row.used_attempts_count,
-          #         row.init_hints_count, row.used_hits_count]
-          #     .join('-----')
-          # end
         else
           puts 'Empty Statistic'
         end

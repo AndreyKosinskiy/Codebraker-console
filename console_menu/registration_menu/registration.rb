@@ -63,17 +63,11 @@ module ConsoleMenu
           exit_now!(difficult_name)
           difficult_variant = difficult_by_name(difficult_name)
           go_to_game = check_difficult_variant(difficult_variant)
-          # if difficult_variant
-          #   @state[:difficult] = @difficult_object.new(difficult_variant: difficult_variant)
-          #   go_to_game = true
-          # else
-          #   puts '=> Entered difficult name is not in list. Try again!'
-          # end
         end
       end
 
       def difficult_by_name(input_value)
-        @difficult_object::DIFFICULT_VARIANTS.detect { |value| value[:name] == input_value }.first
+        @difficult_object::DIFFICULT_VARIANTS.detect { |value| value[:name] == input_value }
       end
 
       def difficult_to_menu

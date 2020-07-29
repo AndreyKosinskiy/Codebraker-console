@@ -8,34 +8,17 @@ module ConsoleMenu
         @state = state
       end
 
-      def check_command(command)
-        case command
-        when 'hint'
-          hint
-        when 'exit'
-          exit
-        else
-          puts 'Try again, wrong command: ' + command
-        end
-      end
-
       def run
         loop do
           show_menu
           command = gets.chomp.downcase
-          break if command == 'guess' && guess == 1
 
-          check_command(command)
-          # case command
-          # when 'guess'
-          #   break if guess == 1
-          # when 'hint'
-          #   hint
-          # when 'exit'
-          #   exit
-          # else
-          #   puts 'Try again, wrong command: ' + command
-          # end
+          case command
+          when 'guess' then break if guess == 1
+          when 'hint' then hint
+          when 'exit' then exit
+          else puts 'Try again, wrong command: ' + command
+          end
         end
       end
 
@@ -65,19 +48,9 @@ module ConsoleMenu
       def check_guess(guess)
         result = @game.my_guess(input_value: guess)
         puts cover_for_result(result)
-        check_win(result)
-        # if @game.player_win?(result)
-        #   puts "You win!\n Save result?(Yes/No(or else))"
-        #   save_it = gets.chomp.downcase
-        #   save_game_result if save_it == 'yes'
-        #   return 1
-        # end
+        return 1 if check_win(result) == 1
+
         check_lose
-        # unless @game.can_use_attempts?
-        #   # TODO: i18n gem
-        #   puts ' You have not any attempts left.'
-        #   1
-        # end
       rescue ArgumentError => e
         puts e.message
       end
@@ -86,24 +59,6 @@ module ConsoleMenu
         puts 'Enter guess: '
         guess = gets.chomp.downcase
         check_guess(guess)
-        # begin
-        #   result = @game.my_guess(input_value: guess)
-        #   puts cover_for_result(result)
-        #   if @game.player_win?(result)
-        #     puts "You win!\n Save result?(Yes/No(or else))"
-        #     save_it = gets.chomp.downcase
-        #     save_game_result if save_it == 'yes'
-        #     return 1
-        #   end
-
-        #   unless @game.can_use_attempts?
-        #     # TODO: i18n gem
-        #     puts ' You have not any attempts left.'
-        #     1
-        #   end
-        # rescue ArgumentError => e
-        #   puts e.message
-        # end
       end
 
       def hint

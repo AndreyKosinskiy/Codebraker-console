@@ -1,5 +1,12 @@
 AllCops:
-    NewCops: enable
-
+  NewCops: enable
 Style/Documentation:
-    Enabled: false
+  Enabled: false
+Style/FrozenStringLiteralComment:
+  Enabled: false
+Metrics/BlockLength:
+  Exclude:
+    - "spec/**/*.rb"
+Metrics/MethodLength:
+  Exclude:
+    - "ConsoleMenu::MainMenu::Main#check_menu"
