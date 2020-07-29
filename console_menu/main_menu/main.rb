@@ -12,18 +12,30 @@ module ConsoleMenu
         loop do
           show_menu
           command = gets.chomp.downcase
-          case command
-          when 'start'
-            break
-          when 'rule'
-            show_rule
-          when 'stat'
-            show_statistics
-          when 'exit'
-            exit
-          else
-            puts 'Try again, wrong command: ' + command
-          end
+          break if command == 'start'
+
+          check_menu(command)
+          # case command
+          # when 'start'
+          #   break
+          # when 'rule'
+          #   show_rule
+          # when 'stat'
+          #   show_statistics
+          # when 'exit'
+          #   exit
+          # else
+          #   puts 'Try again, wrong command: ' + command
+          # end
+        end
+      end
+
+      def check_menu(command)
+        case command
+        when 'rule' then show_rule
+        when 'stat' then show_statistics
+        when 'exit' then exit
+        else puts 'Try again, wrong command: ' + command
         end
       end
 
@@ -41,17 +53,27 @@ module ConsoleMenu
         file.close
       end
 
+      def puts_line(statistic_table)
+        statistic_table.map do |row|
+          puts [row.player_name, row.difficult_name,
+                row.init_attempts_count, row.used_attempts_count,
+                row.init_hints_count, row.used_hits_count]
+            .join('-----')
+        end
+      end
+
       def show_statistics
         statistic_table = @sheet.load
         puts '================== begin ======================'
         puts 'Rating-----Name-----Difficulty-----Attempts Total-----Attempts Used-----Hints Total----Hints Used'
         if statistic_table
-          statistic_table.map do |row|
-            puts [row.player_name, row.difficult_name,
-                  row.init_attempts_count, row.used_attempts_count,
-                  row.init_hints_count, row.used_hits_count]
-              .join('-----')
-          end
+          puts_line(statistic_table)
+          # statistic_table.map do |row|
+          #   puts [row.player_name, row.difficult_name,
+          #         row.init_attempts_count, row.used_attempts_count,
+          #         row.init_hints_count, row.used_hits_count]
+          #     .join('-----')
+          # end
         else
           puts 'Empty Statistic'
         end
