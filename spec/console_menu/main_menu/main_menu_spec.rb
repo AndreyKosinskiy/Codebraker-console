@@ -41,13 +41,6 @@ RSpec.describe ConsoleMenu::MainMenu::Main do
   end
 
   describe '#run' do
-    # it 'call chek_menu when input not "start"' do
-    #   $stdin = StringIO.new(commands[:rule])
-    #   expect(curr_inst).to receive(:check_menu)
-    #   curr_inst.run
-    #   $stdin = STDIN
-    # end
-
     it 'call check_menu' do
       allow(curr_inst).to receive(:check_menu).and_raise(SystemExit)
       allow(curr_inst).to receive(:gets).and_return('exit')
@@ -57,7 +50,6 @@ RSpec.describe ConsoleMenu::MainMenu::Main do
     it 'break when input start' do
       $stdin = StringIO.new(commands[:start])
       expect(curr_inst.run).to eq(nil)
-      $stdin = STDIN
     end
 
     describe '#check_menu' do
