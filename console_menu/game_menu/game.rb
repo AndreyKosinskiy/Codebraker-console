@@ -12,7 +12,6 @@ module ConsoleMenu
         loop do
           show_menu
           command = gets.chomp.downcase
-
           case command
           when 'guess' then break if guess == 1
           when 'hint' then hint
@@ -24,9 +23,7 @@ module ConsoleMenu
 
       def show_menu
         # TODO: i18n gem
-        puts '1. guess'
-        puts '2. hint'
-        puts '3. exit'
+        puts "1. guess\n2. hint\n3. exit"
       end
 
       def check_win(result)

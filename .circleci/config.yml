@@ -33,11 +33,11 @@ commands:
       - run:
           name: fasterer
           command: bundle exec fasterer
-  # run_specs:
-  #   steps:
-  #     - run:
-  #         name: run_specs
-  #         command: bundle exec rspec --format progress spec
+  run_specs:
+    steps:
+      - run:
+          name: run_specs
+          command: bundle exec rspec --format progress spec
 
 jobs:
   lintering:
@@ -49,13 +49,13 @@ jobs:
     executor: default
     steps:
       - defaults
-      # - run_specs
+      - run_specs
 
 workflows:
   version: 2.1
   build:
     jobs:
       - lintering
-      # - run_specs:
-      #     requires:
-      #       - lintering
+      - run_specs:
+          requires:
+            - lintering

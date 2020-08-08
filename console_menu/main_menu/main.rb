@@ -4,6 +4,7 @@ module ConsoleMenu
   module MainMenu
     class Main
       def initialize(rule_file_path:, sheet:)
+        Validation::MainMenu.validation_init_args(rule_file_path: rule_file_path, sheet: sheet)
         @rule_file_path = rule_file_path
         @sheet = sheet
       end
@@ -15,18 +16,6 @@ module ConsoleMenu
           break if command == 'start'
 
           check_menu(command)
-          # case command
-          # when 'start'
-          #   break
-          # when 'rule'
-          #   show_rule
-          # when 'stat'
-          #   show_statistics
-          # when 'exit'
-          #   exit
-          # else
-          #   puts 'Try again, wrong command: ' + command
-          # end
         end
       end
 
@@ -40,11 +29,7 @@ module ConsoleMenu
       end
 
       def show_menu
-        puts '1. Start'
-        puts '2. Rule'
-        puts '3. Stat'
-        puts '4. Exit'
-        puts 'Enter your choice: '
+        puts "1. Start\n2. Rule\n3. Stat\n4. Exit\nEnter your choice: "
       end
 
       def show_rule

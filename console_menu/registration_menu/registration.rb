@@ -31,16 +31,10 @@ module ConsoleMenu
         go_to_choose_difficult = false
         until go_to_choose_difficult
           puts 'Please, enter your name: '
-          player_name = gets.chomp
+          player_name = gets
+          puts player_name
           exit_now!(player_name)
           go_to_choose_difficult = check_player(player_name)
-          # begin
-          #   @state[:player] = @player_object.new(name: player_name)
-          #   go_to_choose_difficult = true
-          # rescue ArgumentError => e
-          #   puts e.message
-          #   puts '=> Please, try again'
-          # end
         end
       end
 

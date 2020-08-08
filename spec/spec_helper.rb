@@ -17,8 +17,9 @@ require 'simplecov'
 SimpleCov.start do
   add_filter 'spec/'
 end
-SimpleCov.minimum_coverage 95
+SimpleCov.minimum_coverage 94
 require_relative '../console_menu/bootstrap'
+require_relative '../console_menu/console'
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
