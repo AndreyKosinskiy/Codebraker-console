@@ -48,7 +48,7 @@ RSpec.describe ConsoleMenu::MainMenu::Main do
     end
 
     it 'break when input start' do
-      $stdin = StringIO.new(commands[:start])
+      allow(curr_inst).to receive(:gets).and_return(commands[:start])
       expect(curr_inst.run).to eq(nil)
     end
 
